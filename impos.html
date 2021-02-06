@@ -1,0 +1,1553 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- fixed bug where computer 1st on impossible **WAS** 'possible' to win....-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--GET http://127.0.0.1:5500/favicon.ico 404 (Not Found)-->
+    <link rel="shortcut icon" href="#">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            /* font-family: sans-serif; */
+
+        }
+
+        body {
+            background-color: black;
+            color: white;
+        }
+
+        body,
+        html {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 90px 90px 90px;
+            grid-template-rows: 90px 90px 90px;
+            width: 270px;
+            margin: auto;
+            margin-top: 10vh;
+            position: relative;
+        }
+
+        .container>div {
+            background-color: black;
+        }
+
+        .center-align:hover {
+            background-color: red !important;
+            cursor: pointer;
+        }
+
+        .button-wrapper {
+            display: flex;
+            /* justify-content: space-around; */
+            width: 270px;
+            /* align-items: center; */
+            align-items: center;
+            /* Vertical */
+            justify-content: space-around;
+            /* Horizontal */
+
+        }
+
+        .upper-wrapper {
+            position: absolute;
+            top: -30px;
+            display: flex;
+            justify-content: space-around;
+            width: 270px;
+        }
+
+        .center-align {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border: 2px solid blue;
+        }
+
+        /* this is for mobile */
+        @media (min-width: 310px) and (min-height:500px) {
+            body {
+                /* background-color: teal; */
+                font-size: 20px;
+            }
+
+            .container {
+                margin-top: 30vh;
+            }
+        }
+
+        @media (min-width:760px) and (min-height:600px) {
+            body {
+                /* background-color: pink; */
+                font-size: 23px;
+            }
+
+            .container {
+                grid-template-columns: 150px 150px 150px;
+                grid-template-rows: 150px 150px 150px;
+                width: 450px;
+                margin-top: 10vh;
+            }
+
+            .button-wrapper,
+            .upper-wrapper {
+                width: 450px;
+            }
+
+            .center-align {
+                font-size: 150px;
+            }
+        }
+
+        @media (min-width:860px) and (min-height:710px) {
+            body {
+                /* background-color: blue; */
+                font-size: 25px;
+            }
+
+            .container {
+                grid-template-columns: 190px 190px 190px;
+                grid-template-rows: 190px 190px 190px;
+                width: 580px;
+                margin-top: 5vh;
+            }
+
+            .button-wrapper,
+            .upper-wrapper {
+                width: 580px;
+            }
+
+            .center-align {
+                font-size: 170px;
+            }
+        }
+
+        /* #winMsg {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            color: red;
+        } */
+
+        .bottom-button {
+            padding: 5px;
+            margin-top: 10px;
+        }
+
+        .container>div {
+            box-sizing: border-box;
+        }
+
+        .winner-status {
+            color: red;
+            text-align: center;
+        }
+
+        /* 
+        #button-replay {
+            display: flex;
+            justify-content: center;
+        } */
+
+        #Replay {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        #computerFirst {
+            font-size: 20px;
+            width: 90px;
+            height: 30px;
+        }
+
+        /* #difficulty {
+            display: flex;
+            justify-content: center;
+            visibility: visible;
+            margin-left: auto;
+            margin-right: auto;
+        } */
+
+        #score {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        #x {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #o {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #cats {
+            display: flex;
+            justify-content: center;
+        }
+
+        #volume {
+            position: absolute;
+            top: -12px;
+            right: -40px;
+        }
+
+        #computer {
+            display: flex;
+            justify-content: center;
+        }
+
+        #secondDiff {
+            position: absolute;
+            visibility: hidden;
+            left: 3px;
+
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <!-- <div id="score">
+        <div id="x">
+            <div>X-</div>
+            <div id="xTotal">0</div>
+        </div> -->
+    <!-- <div id="togglePlyr" onclick="togglePlayer()"><button id="toggle">Play two player</button></div> -->
+    <!-- <div id="o">
+            <div>O-</div>
+            <div id="oTotal">0</div>
+        </div>
+    </div> -->
+
+    <div class="container">
+        <div class="center-align" id="0" onclick="playSoundX(this); change(this);"> - </div>
+        <div class="center-align" id="1" onclick="playSoundX(this); change(this);"> - </div>
+        <div class="center-align" id="2" onclick="playSoundX(this); change(this);"> - </div>
+
+
+        <div class="center-align" id="3" onclick="playSoundX(this); change(this);"> - </div>
+        <div class="center-align" id="4" onclick="playSoundX(this); change(this);"> - </div>
+        <div class="center-align" id="5" onclick="playSoundX(this); change(this);"> - </div>
+
+
+        <div class="center-align" id="6" onclick="playSoundX(this); change(this);"> - </div>
+        <div class="center-align" id="7" onclick="playSoundX(this); change(this);"> - </div>
+        <div class="center-align" id="8" onclick="playSoundX(this); change(this);"> - </div>
+
+        <div class="button-wrapper">
+            <div class="bottom-button" id="difficulty">
+                <select id="hardness" onchange="reset()">
+                    <option value="easy">Easy</option>
+                    <option value="medium" id="medium">Medium</option>
+                    <option value="hard" selected>Hard</option>
+                    <option value="super-hard" id="superHard">Super-Hard</option>
+                    <option value="impossible">Impossible</option>
+
+                </select>
+            </div>
+            <!-- <div id="secondDiff">
+                <select id="secondHardness" onchange="reset()">
+                    <option value="easy">Easy</option>
+                    <option value="hard" selected>Hard</option>
+                    <option value="impossible">Impossible</option>
+                </select>
+            </div> -->
+            <div class="bottom-button button" id="button-replay"><button id="Replay" onclick="reset()">Replay</button>
+            </div>
+            <div class="bottom" id="computer">
+                <button id="computerFirst" onclick="changeComputerTurn()">PC 1st</button>
+            </div>
+            <div class="bottom-button" id="togglePlyr" onclick="togglePlayer()"><button id="toggle">2 player</button>
+            </div>
+        </div>
+        <div class="upper-wrapper" id="score">
+            <div class="upper-button" id="x">
+                <div>X-</div>
+                <div id="xTotal">0</div>
+            </div>
+            <div class="upper-button" id="cats">
+                Cats-
+                <div id="catsTotal">0</div>
+            </div>
+            <div class="upper-button" id="o">
+                <div>O-</div>
+                <div id="oTotal">0</div>
+            </div>
+        </div>
+
+        <div id="volume">
+            <button id="mute" onclick="changeVolume()">Mute</button>
+        </div>
+    </div>
+    <div class="winner-status" id="winMsg"></div>
+
+
+
+    <p></p>
+    <!-- <div id="button-replay">
+        <button id="Replay" onclick="reset()" style="font-size:30px; display:none;">REPLAY</button>
+    </div> -->
+
+    <!-- <div id="winMsg"></div> -->
+
+    <!-- <div id="secondDiff">
+        <select id="secondHardness" onchange="reset()">
+            <option value="easy">Easy</option>
+            <option value="hard" selected>Hard</option>
+            <option value="impossible">Impossible</option>
+        </select>
+    </div> -->
+    <!-- <br> -->
+    <!-- <div id="cats">Cats-
+        <div id="catsTotal">0</div>
+    </div> -->
+    <!-- <div id="volume">
+        <button id="mute" onclick="changeVolume()">Mute</button>
+    </div> -->
+    <!-- <br> -->
+    <!-- <div id="computer">
+        <button id="computerFirst" onclick="changeComputerTurn()">Computer Goes First</button>
+    </div> -->
+    <!-- <input type="range" min="0" max="1" value="10" step="1" id="volSlider"> -->
+    <audio id="playX" src="https://www.soundjay.com/button/sounds/button-50.mp3"></audio>
+    <audio id="playY" src="https://www.soundjay.com/button/sounds/button-29.mp3"></audio>
+    <audio id="winSound" src="https://www.soundjay.com/misc/sounds/magic-chime-01.mp3"></audio>
+    <audio id="loserSound" src="https://www.soundjay.com/misc/sounds/fail-trombone-01.mp3"></audio>
+    <audio id="catsSound" src="https://www.soundjay.com/door/sounds/door-3-open.mp3"></audio>
+
+    <script>
+
+        let time = 0;
+
+        function playSoundX(square) {
+            if (document.getElementById(square.id).innerHTML == " " && turn == true && gameOver == false && mute == false) {
+
+                // check if 2plyer mode is on
+                if (onePlyr == true) {
+                    document.getElementById('playX').play();
+                }
+                else {
+                    if (player % 2 == 0) {
+                        document.getElementById('playY').play();
+
+                    }
+                    else {
+                        document.getElementById('playX').play();
+
+                    }
+                }
+            }
+        }
+
+        function playSoundY() {
+            if (mute == false) {
+                document.getElementById('playY').play();
+            }
+        }
+
+        function playWinner() {
+            if (mute == false) {
+                document.getElementById("winSound").play();
+            }
+        }
+
+        function playLoser() {
+            let audio = document.getElementById("loserSound");
+            audio.volume = .5;
+            audio.currentTime = 0;
+            if (mute == false) {
+                audio.play();
+            }
+            // audio.addEventListener("ended", function () {
+            //     alert("dojo");
+            // })
+        }
+
+        function playCats() {
+            if (mute == false) {
+                document.getElementById("catsSound").play();
+            }
+        }
+
+        function changeVolume() {
+            if (document.getElementById("mute").innerHTML == "Mute") {
+                document.getElementById("mute").innerHTML = "Unmute";
+                mute = true;
+                // pause loser-> win and draw are too fast 
+                let audioL = document.getElementById("loserSound");
+                audioL.pause();
+            }
+            else {
+                document.getElementById("mute").innerHTML = "Mute";
+                mute = false;
+            }
+        }
+        function changeComputerTurn() {
+            if (document.getElementById("computerFirst").innerHTML == "PC 1st") {
+                document.getElementById("computerFirst").innerHTML = "PC 2nd";
+                computerFirst = true;
+                turn = false;
+                // hide 5 levels and show 3 levels
+                // document.getElementById("difficulty").style.visibility = "hidden";
+                // document.getElementById("secondDiff").style.visibility = "visible";
+
+                // disable superHard and medium levels
+                document.getElementById("medium").disabled = true;
+                // document.getElementById("superHard").disabled = true;
+
+            }
+            else {
+                document.getElementById("computerFirst").innerHTML = "PC 1st";
+                computerFirst = false;
+                // document.getElementById("difficulty").style.visibility = "visible";
+                // document.getElementById("secondDiff").style.visibility = "hidden";
+
+                // re-enable superHard and medium levels
+                document.getElementById("medium").disabled = false;
+                document.getElementById("superHard").disabled = false;
+
+            }
+            reset();
+        }
+
+        // add random spots for when 1st move isn't center, or corner
+        // global variables
+        let gameOver = false;
+        let playerMoves = 0;
+        let spotList = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        let turn = true;
+        let xWins = 0;
+        let oWins = 0;
+        let draws = 0;
+        let onePlyr = true;
+        let player = 1;
+        let mute = false;
+        let computerFirst = false;
+
+        function findWinner(letter) {       //row winners
+            if ((document.getElementById(0).innerHTML == letter &&
+                document.getElementById(1).innerHTML == letter &&
+                document.getElementById(2).innerHTML == letter) ||
+
+                (document.getElementById(3).innerHTML == letter &&
+                    document.getElementById(4).innerHTML == letter &&
+                    document.getElementById(5).innerHTML == letter) ||
+
+                (document.getElementById(6).innerHTML == letter &&
+                    document.getElementById(7).innerHTML == letter &&
+                    document.getElementById(8).innerHTML == letter) ||
+
+                // col winners
+                (document.getElementById(0).innerHTML == letter &&
+                    document.getElementById(3).innerHTML == letter &&
+                    document.getElementById(6).innerHTML == letter) ||
+
+                (document.getElementById(1).innerHTML == letter &&
+                    document.getElementById(4).innerHTML == letter &&
+                    document.getElementById(7).innerHTML == letter) ||
+
+                (document.getElementById(2).innerHTML == letter &&
+                    document.getElementById(5).innerHTML == letter &&
+                    document.getElementById(8).innerHTML == letter) ||
+
+                // diag winners
+                (document.getElementById(0).innerHTML == letter &&
+                    document.getElementById(4).innerHTML == letter &&
+                    document.getElementById(8).innerHTML == letter) ||
+
+                (document.getElementById(2).innerHTML == letter &&
+                    document.getElementById(4).innerHTML == letter &&
+                    document.getElementById(6).innerHTML == letter)) {
+                gameOver = true;
+                // triggwer Winner Graphic
+
+                if (onePlyr == true) {
+                    if (letter == "X") {
+                        winGraphicX();
+                        playWinner();
+                    }
+                    else {
+                        winGraphicO();
+                        playLoser();
+                    }
+
+                }
+                else {
+                    winGraphicX();
+                    playWinner();
+                }
+                return true;
+            }
+        }
+
+        function winGraphicX() {
+            let winInterval = setInterval(strobe, 50);
+            let stopGraphic = false;
+            let x = 0;
+            function strobe() {
+
+                if (stopGraphic == false) {
+                    // 17 total spots to be
+                    list = [0, 1, 2, 5, 4, 3, 6, 7, 8, 7, 6, 3, 4, 5, 2, 1, 0];
+                    colors = ["red", "green", "blue", "yellow", "pink", "purple", "orange", "white", "crimson", "turqoise", "red", "green", "blue", "yellow", "pink", "purple", "orange", "white", "crimson", "turqoise"]
+                    if (x < 17) {
+                        document.getElementById(list[x]).style.backgroundColor = colors[x];
+                    }
+
+                    if (x - 1 >= 0) {
+                        document.getElementById(list[x - 1]).style.backgroundColor = "black";
+                    }
+                    x++;
+                    // console.log(x);
+
+                    if (x == 18) {
+                        x = 0;
+                        stopGraphic = true;
+                        clearInterval(winInterval);
+                        findWinningLine("X");
+                        findWinningLine("O");
+                    }
+                }
+            }
+        }
+        function winGraphicO() {
+            let loseInterval = setInterval(strobe, 50);
+            let stopGraphic = false;
+            let x = 0;
+            function strobe() {
+
+                if (stopGraphic == false) {
+                    // 17 total spots to be
+                    list = [0, 1, 2, 5, 4, 3, 6, 7, 8, 7, 6, 3, 4, 5, 2, 1, 0];
+                    if (x < 17) {
+                        document.getElementById(list[x]).style.backgroundColor = "orange";
+                    }
+
+                    if (x - 1 >= 0) {
+                        document.getElementById(list[x - 1]).style.backgroundColor = "black";
+                    }
+                    x++;
+                    // console.log(x);
+
+                    if (x == 18) {
+                        x = 0;
+                        stopGraphic = true;
+                        clearInterval(loseInterval);
+                        findWinningLine("O");
+                    }
+                }
+
+            }
+
+        }
+
+        function findDraw() {
+            if (playerMoves == 5 || player == 10) {
+                gameOver = true;
+                drawGraphic();
+                draws++;
+                document.getElementById("catsTotal").innerHTML = draws;
+                playCats();
+                return true;
+            }
+        }
+
+        function findWinningLine(letter) {
+            winList = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
+            for (let i = 0; i < 8; i++) {
+                let winner = true;
+                for (let j = 0; j < 3; j++) {
+                    if (document.getElementById(winList[i][j]).innerHTML != letter) {
+                        winner = false;
+                    }
+                }
+                if (winner == true) {
+                    showWinningLine(winList[i]);
+                    // return;
+                }
+            }
+
+            function showWinningLine(numbers) {
+                let colorsList = ["#8B0000", "grey", "blue"];
+                let x = 0;
+                let stopLightup = false;
+                let line = setInterval(lightUp, 50);
+                function lightUp() {
+                    if (stopLightup == false && gameOver == true) {
+                        document.getElementById(numbers[x]).style.backgroundColor = colorsList[x];
+                    }
+                    x++;
+                    if (x == 3) {
+                        stopLightup = true;
+                        clearInterval(line);
+                    }
+                    if (gameOver == false) {
+                        // in case reset is hit in a 1/1000000 bad luck
+                        turnAllBlack();
+                    }
+                }
+            }
+        }
+
+        function turnAllBlack() {
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(i).style.backgroundColor = "black";
+            }
+        }
+
+        function drawGraphic() {
+            let drawInterval = setInterval(blink, 100);
+            let stopBlink = false;
+            let y = 0;
+
+            // turn spots on
+            onList = [0, 1, 2, 3, 5, 6, 7, 8];
+            function on() {
+                for (let i = 0; i < 8; i++) {
+                    document.getElementById(onList[i]).style.backgroundColor = "#282828";
+                }
+            }
+            function off() {
+                for (let i = 0; i < 8; i++) {
+                    document.getElementById(onList[i]).style.backgroundColor = "black";
+                }
+            }
+            // blink
+            function blink() {
+
+                if (stopBlink == false) {
+
+                    if (y < 15) {
+                        on();
+                        // alert("on")
+                        setTimeout(off, 40);
+                    }
+
+                    y++;
+                    // console.log(y);
+                    if (y == 8) {
+                        y = 0;
+                        stopBlink = true;
+                        clearInterval(drawInterval);
+                    }
+                }
+            }
+        }
+
+        function removeSpot(spot) {
+            for (let i = 0; i < 9; i++) {
+                if (spot == spotList[i]) {
+                    spotList.splice(i, 1);
+                    return;
+                }
+            }
+        }
+
+        function reset() {
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(i).innerHTML = " ";
+            }
+            playerMoves = 0;
+            gameOver = false;
+            document.querySelector("#winMsg").innerHTML = " ";
+            // document.querySelector("#Replay").style.display = "none";
+            spotList = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            turn = true;
+            player = 1;
+            turnAllBlack();
+
+            if (computerFirst == true && onePlyr == true) {
+                turn = false;
+                setTimeout(computerMove2, time);
+            }
+
+        }
+
+        function resetMultiPlayerToggle() {
+            for (let i = 0; i < 9; i++) {
+                document.getElementById(i).innerHTML = " ";
+            }
+            playerMoves = 0;
+            gameOver = false;
+            document.querySelector("#winMsg").innerHTML = " ";
+            // document.querySelector("#Replay").style.display = "none";
+            spotList = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            turn = true;
+            player = 1;
+            turnAllBlack();
+
+        }
+
+        function togglePlayer() {
+            // switch to 2 player
+            if (onePlyr == true) {
+                onePlyr = false;
+                document.getElementById("toggle").innerHTML = "Play one player";
+                resetMultiPlayerToggle();
+                document.getElementById("xTotal").innerHTML = "0";
+                document.getElementById("oTotal").innerHTML = "0";
+                document.getElementById("catsTotal").innerHTML = "0";
+
+                // hide difficulty levels
+                document.getElementById("hardness").disabled = true;
+                // document.getElementById("secondDiff").style.visibility = "hidden";
+
+                // hide computer go first button
+                document.getElementById("computerFirst").disabled = true;
+
+            }
+            // switch to single player
+            else {
+                onePlyr = true;
+                document.getElementById("toggle").innerHTML = "Play two player";
+                document.getElementById("xTotal").innerHTML = "0";
+                document.getElementById("oTotal").innerHTML = "0";
+                document.getElementById("catsTotal").innerHTML = "0";
+
+                // hide difficulty levls
+                // document.getElementById("difficulty").style.visibility = "visible";
+                // resetMultiPlayerToggle();
+
+                // show computer go first button
+                // document.getElementById("computerFirst").style.visibility = "visible";
+
+                // if player was playing computer first mode, it will reset and let computer do first move automatically
+
+                // show difficulty levels and pc first button again
+                document.getElementById("hardness").disabled = false;
+                document.getElementById("computerFirst").disabled = false;
+
+                if (document.getElementById("computerFirst").innerHTML == "PC 2nd") {
+                    reset();
+                    // document.getElementById("difficulty").style.visibility = "hidden";
+                    // document.getElementById("secondDiff").style.visibility = "visible";
+                    // show difficulty levels and pc first button again
+                    document.getElementById("hardness").disabled = false;
+                    document.getElementById("computerFirst").disabled = false;
+
+
+                    return;
+                }
+                reset();
+
+            }
+        }
+
+        function whosTurn() {
+            if (computerFirst == false) {
+                // handles for single and mutliplayer
+                if (spotList.length % 2 != 0 && player % 2 != 0) {
+                    document.getElementById("x").style.textDecoration = "underline";
+                    document.getElementById("o").style.textDecoration = " ";
+                }
+                // if its y turn
+                else {
+                    document.getElementById("x").style.textDecoration = " ";
+                    document.getElementById("o").style.textDecoration = "underline";
+                }
+            }
+            else if (computerFirst == true && onePlyr == false) {
+                if (player % 2 != 0) {
+                    document.getElementById("x").style.textDecoration = "underline";
+                    document.getElementById("o").style.textDecoration = " ";
+                }
+                else {
+                    document.getElementById("x").style.textDecoration = " ";
+                    document.getElementById("o").style.textDecoration = "underline";
+                }
+            }
+            else {
+                if (spotList.length % 2 != 0 && player % 2 != 0) {
+                    document.getElementById("o").style.textDecoration = "underline";
+                    document.getElementById("x").style.textDecoration = " ";
+                }
+                // if its y turn
+                else {
+                    document.getElementById("o").style.textDecoration = " ";
+                    document.getElementById("x").style.textDecoration = "underline";
+                }
+            }
+        }
+        setInterval(whosTurn, 400);
+
+        function middleOpen() {
+            const middle = document.getElementById("4").innerHTML;
+            if (middle == " ") {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        function takeWin() {
+            // top row
+            if (document.getElementById("0").innerHTML == "O" && document.getElementById("1").innerHTML == "O" && document.getElementById("2").innerHTML == " ") {
+                return "2";
+            }
+            else if (document.getElementById("1").innerHTML == "O" && document.getElementById("2").innerHTML == "O" && document.getElementById("0").innerHTML == " ") {
+                return "0";
+            }
+            else if (document.getElementById("0").innerHTML == "O" && document.getElementById("2").innerHTML == "O" && document.getElementById("1").innerHTML == " ") {
+                return "1";
+            }
+            // middle row
+            else if (document.getElementById("3").innerHTML == "O" && document.getElementById("4").innerHTML == "O" && document.getElementById("5").innerHTML == " ") {
+                return "5";
+            }
+            else if (document.getElementById("4").innerHTML == "O" && document.getElementById("5").innerHTML == "O" && document.getElementById("3").innerHTML == " ") {
+                return "3";
+            }
+            else if (document.getElementById("3").innerHTML == "O" && document.getElementById("5").innerHTML == "O" && document.getElementById("4").innerHTML == " ") {
+                return "4";
+            }
+            // bottom row
+            else if (document.getElementById("6").innerHTML == "O" && document.getElementById("7").innerHTML == "O" && document.getElementById("8").innerHTML == " ") {
+                return "8";
+            }
+            else if (document.getElementById("7").innerHTML == "O" && document.getElementById("8").innerHTML == "O" && document.getElementById("6").innerHTML == " ") {
+                return "6";
+            }
+            else if (document.getElementById("6").innerHTML == "O" && document.getElementById("8").innerHTML == "O" && document.getElementById("7").innerHTML == " ") {
+                return "7";
+            }
+            // colums -> left, middle, right
+            else if (document.getElementById("0").innerHTML == "O" && document.getElementById("3").innerHTML == "O" && document.getElementById("6").innerHTML == " ") {
+                return "6";
+            }
+            else if (document.getElementById("3").innerHTML == "O" && document.getElementById("6").innerHTML == "O" && document.getElementById("0").innerHTML == " ") {
+                return "0";
+            }
+            else if (document.getElementById("0").innerHTML == "O" && document.getElementById("6").innerHTML == "O" && document.getElementById("3").innerHTML == " ") {
+                return "3";
+            }
+            else if (document.getElementById("1").innerHTML == "O" && document.getElementById("4").innerHTML == "O" && document.getElementById("7").innerHTML == " ") {
+                return "7";
+            }
+            else if (document.getElementById("4").innerHTML == "O" && document.getElementById("7").innerHTML == "O" && document.getElementById("1").innerHTML == " ") {
+                return "1";
+            }
+
+            else if (document.getElementById("2").innerHTML == "O" && document.getElementById("5").innerHTML == "O" && document.getElementById("8").innerHTML == " ") {
+                return "8";
+            }
+            else if (document.getElementById("5").innerHTML == "O" && document.getElementById("8").innerHTML == "O" && document.getElementById("2").innerHTML == " ") {
+                return "2";
+            }
+            else if (document.getElementById("2").innerHTML == "O" && document.getElementById("8").innerHTML == "O" && document.getElementById("5").innerHTML == " ") {
+                return "5";
+            }
+            //diagonals left, then right
+            else if (document.getElementById("0").innerHTML == "O" && document.getElementById("4").innerHTML == "O" && document.getElementById("8").innerHTML == " ") {
+                return "8";
+            }
+            else if (document.getElementById("4").innerHTML == "O" && document.getElementById("8").innerHTML == "O" && document.getElementById("0").innerHTML == " ") {
+                return "0";
+            }
+            else if (document.getElementById("0").innerHTML == "O" && document.getElementById("8").innerHTML == "O" && document.getElementById("4").innerHTML == " ") {
+                return "4";
+            }
+            else if (document.getElementById("2").innerHTML == "O" && document.getElementById("4").innerHTML == "O" && document.getElementById("6").innerHTML == " ") {
+                return "6";
+            }
+            else if (document.getElementById("6").innerHTML == "O" && document.getElementById("4").innerHTML == "O" && document.getElementById("2").innerHTML == " ") {
+                return "2";
+            }
+            else if (document.getElementById("2").innerHTML == "O" && document.getElementById("6").innerHTML == "O" && document.getElementById("4").innerHTML == " ") {
+                return "4";
+            }
+            else {
+                return 99;
+            }
+        }
+
+        function blockWin() {
+            // middle spots open
+
+            if (document.getElementById("0").innerHTML == "X" && document.getElementById("6").innerHTML == "X" && document.getElementById("3").innerHTML == " ") {
+                return "3";
+            }
+            else if (document.getElementById("2").innerHTML == "X" && document.getElementById("8").innerHTML == "X" && document.getElementById("5").innerHTML == " ") {
+                return "5";
+            }
+            else if (document.getElementById("0").innerHTML == "X" && document.getElementById("2").innerHTML == "X" && document.getElementById("1").innerHTML == " ") {
+                return "1";
+            }
+            else if (document.getElementById("6").innerHTML == "X" && document.getElementById("8").innerHTML == "X" && document.getElementById("7").innerHTML == " ") {
+                return "7";
+            }
+            else if (document.getElementById("3").innerHTML == "X" && document.getElementById("5").innerHTML == "X" && document.getElementById("4").innerHTML == " ") {
+                return "4";
+            }
+            // end spots open row
+            else if (document.getElementById("0").innerHTML == "X" && document.getElementById("1").innerHTML == "X" && document.getElementById("2").innerHTML == " ") {
+                return "2";
+            }
+            else if (document.getElementById("1").innerHTML == "X" && document.getElementById("2").innerHTML == "X" && document.getElementById("0").innerHTML == " ") {
+                return "0";
+            }
+            else if (document.getElementById("7").innerHTML == "X" && document.getElementById("8").innerHTML == "X" && document.getElementById("6").innerHTML == " ") {
+                return "6";
+            }
+            else if (document.getElementById("6").innerHTML == "X" && document.getElementById("7").innerHTML == "X" && document.getElementById("8").innerHTML == " ") {
+                return "8";
+            }
+            // middle row  end spots
+            else if (document.getElementById("3").innerHTML == "X" && document.getElementById("4").innerHTML == "X" && document.getElementById("5").innerHTML == " ") {
+                return "5";
+            }
+            else if (document.getElementById("4").innerHTML == "X" && document.getElementById("5").innerHTML == "X" && document.getElementById("3").innerHTML == " ") {
+                return "3";
+            }
+            // col end spots left,middle, right
+            else if (document.getElementById("3").innerHTML == "X" && document.getElementById("6").innerHTML == "X" && document.getElementById("0").innerHTML == " ") {
+                return "0";
+            }
+            else if (document.getElementById("0").innerHTML == "X" && document.getElementById("3").innerHTML == "X" && document.getElementById("6").innerHTML == " ") {
+                return "6";
+            }
+            else if (document.getElementById("4").innerHTML == "X" && document.getElementById("7").innerHTML == "X" && document.getElementById("1").innerHTML == " ") {
+                return "1";
+            }
+            else if (document.getElementById("1").innerHTML == "X" && document.getElementById("7").innerHTML == "X" && document.getElementById("4").innerHTML == " ") {
+                return "4";
+            }
+            else if (document.getElementById("1").innerHTML == "X" && document.getElementById("4").innerHTML == "X" && document.getElementById("7").innerHTML == " ") {
+                return "7";
+            }
+            else if (document.getElementById("5").innerHTML == "X" && document.getElementById("8").innerHTML == "X" && document.getElementById("2").innerHTML == " ") {
+                return "2";
+            }
+            else if (document.getElementById("2").innerHTML == "X" && document.getElementById("5").innerHTML == "X" && document.getElementById("8").innerHTML == " ") {
+                return "8";
+            }
+            //digonal wins
+            else if (document.getElementById("4").innerHTML == "X" && document.getElementById("8").innerHTML == "X" && document.getElementById("0").innerHTML == " ") {
+                return "0";
+            }
+            else if (document.getElementById("0").innerHTML == "X" && document.getElementById("4").innerHTML == "X" && document.getElementById("8").innerHTML == " ") {
+                return "8";
+            }
+            else if (document.getElementById("6").innerHTML == "X" && document.getElementById("4").innerHTML == "X" && document.getElementById("2").innerHTML == " ") {
+                return "2";
+            }
+            else if (document.getElementById("2").innerHTML == "X" && document.getElementById("4").innerHTML == "X" && document.getElementById("6").innerHTML == " ") {
+                return "6";
+            }
+            else if (document.getElementById("4").innerHTML == "X" && document.getElementById("6").innerHTML == "X" && document.getElementById("2").innerHTML == " ") {
+                return "2";
+            }
+            // changed at night with mom
+            else if (document.getElementById("2").innerHTML == "X" && document.getElementById("6").innerHTML == "X" && document.getElementById("4").innerHTML == " ") {
+                return "4";
+            }
+            else {
+                return 88;
+            }
+        }
+
+        function strategy1() {
+            // check if player picked corner, then mark middle
+            let diags = [0, 2, 6, 8];
+            let spot1 = [];
+            let num;
+            function diagCheck() {
+                for (let i = 0; i < diags.length; i++) {
+                    if (document.getElementById(diags[i]).innerHTML == "X") {
+                        return true;
+                    }
+                }
+                return false;
+            }
+            // 1st move Diagonal Check
+            if (diagCheck() && playerMoves == 1) {
+                return "4";
+            }
+            // check if 1st pick is middle, then we pick a corner
+            else if (document.getElementById("4").innerHTML == "X" && playerMoves == 1) {
+                let pick = diags[Math.floor(Math.random() * diags.length)];
+                return pick;
+            }
+            // put 1st computer move next to where player 1 went
+            else {
+                if (document.getElementById("1").innerHTML == "X" && playerMoves == 1) {
+                    spot1 = [0, 2,];
+                    num = spot1[Math.floor(Math.random() * spot1.length)];
+                    return num;
+                }
+                else if (document.getElementById("3").innerHTML == "X" && playerMoves == 1) {
+                    spot1 = [0, 6];
+                    num = spot1[Math.floor(Math.random() * spot1.length)];
+                    return num;
+                }
+                else if (document.getElementById("5").innerHTML == "X" && playerMoves == 1) {
+                    spot1 = [2, 8];
+                    num = spot1[Math.floor(Math.random() * spot1.length)];
+                    return num;
+                }
+                else if (document.getElementById("7").innerHTML == "X" && playerMoves == 1) {
+                    spot1 = [6, 8];
+                    num = spot1[Math.floor(Math.random() * spot1.length)];
+                    return num;
+                }
+                else {
+                    return 101;
+                }
+            }
+        }
+
+        function strategy2() {
+            // if corner triangle is open, pick open spot
+            blockList = [[1, 2, 5], [0, 1, 3], [3, 6, 7], [5, 7, 8]];
+            for (let i = 0; i < 4; i++) {
+                let triangle = true;
+                for (let j = 0; j < 3; j++) {
+                    if (document.getElementById(blockList[i][j]).innerHTML == " ") {
+                        triangle = false;
+                    }
+                }
+                if (triangle == true) {
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function secondDiagonal() {
+            // if diagonal is formed, return what mark occupies the middle
+            let diagFormed = [[0, 4, 8], [2, 4, 6]];
+            for (let i = 0; i < 2; i++) {
+                let diagTrue = true;
+                for (let j = 0; j < 3; j++) {
+                    if (document.getElementById(diagFormed[i][j]).innerHTML == " ")
+                        diagTrue = false;
+                }
+                if (diagTrue == true && document.getElementById("4").innerHTML == "X") {
+                    return "X";
+                }
+                else if (diagTrue == true && document.getElementById("4").innerHTML == "O") {
+                    return "O";
+                }
+            }
+        }
+        function strategy2_1() {
+            // if diganol is formed on 2nd pick, we pick a corner
+            // if middle is an "O", then we pick a random 'plus-sign' spot
+            // if middle is an "X", then we pick a random corner spot
+            let spotLen = spotList.length;
+            let plusSignSpots = [1, 3, 5, 7];
+            let open = false;
+            if (secondDiagonal() == "O") {
+                // find open corner spot
+                do {
+                    let randCorner = plusSignSpots[Math.floor(Math.random() * plusSignSpots.length)];
+                    for (let i = 0; i < spotLen; i++) {
+                        if (randCorner == spotList[i]) {
+                            open = true;
+                            return randCorner;
+                        }
+                    }
+                }
+                while (open == false);
+            }
+            else if (secondDiagonal() == "X") {
+                if (document.getElementById("0").innerHTML == "O") {
+                    return "2";
+                }
+                else if (document.getElementById("2").innerHTML == "O") {
+                    return "0";
+                }
+                else if (document.getElementById("6").innerHTML == "O") {
+                    return "0";
+                }
+                else if (document.getElementById("8").innerHTML == "O") {
+                    return "6";
+                }
+            }
+        }
+
+        function makeBlockWin() {
+            // were going to check, and put 2nd move where it makes player block our win then
+            // moneySpot has one 'O' and no 'X'
+            let availsNum = spotList.length;
+            let goodSpots = [];
+            let diagsList = [0, 2, 6, 8];
+            for (let i = 0; i < availsNum; i++) {
+                // check each number of spotList and add to list if forces plyaer to Block win
+                if (moneySpot(spotList[i]) != 99) {
+                    // only add to list if its a corner
+                    if (diagsList.includes(spotList[i])) {
+                        goodSpots.push(spotList[i]);
+                    }
+                }
+            }
+            // alert(goodSpots);
+            let randGoodSpot = goodSpots[Math.floor(Math.random() * goodSpots.length)];
+            // need to return the corner spot closest to the X's
+            // maybe check if spot has not neighbors, dont pick
+            // pick corner that has  a neighbor
+            for (let i = 0; i < goodSpots.length; i++) {
+                if (goodSpots[i] == 0) {
+                    if (document.getElementById("1").innerHTML == " " && document.getElementById("3").innerHTML == " ") {
+                        // do nothing
+                    }
+                    else {
+                        return goodSpots[i];
+                    }
+                }
+                else if (goodSpots[i] == 2) {
+                    if (document.getElementById("1").innerHTML == " " && document.getElementById("5").innerHTML == " ") {
+                        // do noithing
+                    }
+                    else {
+                        return goodSpots[i];
+                    }
+                }
+                else if (goodSpots[i] == 6) {
+                    if (document.getElementById("3").innerHTML == " " && document.getElementById("7").innerHTML == " ") {
+                        // do nothing
+                    }
+                    else {
+                        return goodSpots[i];
+                    }
+                }
+                else if (goodSpots[i] == 8) {
+                    if (document.getElementById("7").innerHTML == " " && document.getElementById("5").innerHTML == " ") {
+                        // do nothing
+                    }
+                    else {
+                        return goodSpots[i];
+                    }
+                }
+            }
+            // just in case, return a random spot if above doesn't work
+            return goodSpots[randGoodSpot];
+
+        }
+        function moneySpot(number) {
+            let slots = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
+
+            for (let i = 0; i < 8; i++) {
+                // only want to check slots that number is a part of
+                if (!slots[i].includes(number)) {
+                    { continue; }
+                }
+                let xThere = false;
+                let oThere = false;
+                for (let j = 0; j < 3; j++) {
+                    // x check
+                    if (document.getElementById(slots[i][j]).innerHTML == "X") {
+                        xThere = true;
+                    }
+                    if (document.getElementById(slots[i][j]).innerHTML == "O") {
+                        oThere = true;
+                    }
+                }
+                if (xThere == false && oThere == true) {
+                    // alert(number + "is the move");
+                    return true;
+                }
+            }
+            return 99;
+        }
+
+
+        function change(button) {
+
+            // pause losing audio when starting a new game after losing when 1st spot is clicked
+            document.getElementById("loserSound").pause();
+
+            // make reset button appear
+            // document.querySelector("#Replay").innerHTML = "Reset";
+            // document.querySelector("#Replay").style.display = "block";
+
+            // get players spot choice
+            let id = button.id;
+            let box = document.getElementById(id).innerHTML;
+            let playerMark = "X";
+
+            // single player mode, player goes first
+            if (gameOver == false && turn == true && onePlyr == true && computerFirst == false) {
+                // make so player cant move until computer has gone
+                turn = false;
+
+                // check if spot is already taken
+                if (box == "X" || box == "O") {
+                    // make so player can pick again
+                    turn = true;
+                    return;
+                }
+
+                // mark the spot player has chosen
+                document.getElementById(id).innerHTML = playerMark;
+                playerMoves++;
+
+                // remove spot off list
+                removeSpot(id);
+
+                // check for player win, computer win, and a draw
+                if (findWinner("X")) {
+                    document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                    document.querySelector("#Replay").innerHTML = "Replay";
+                    xWins++;
+                    document.getElementById("xTotal").innerHTML = xWins;
+                    return;
+                }
+
+                // check for computer win
+                if (findWinner("O")) {
+                    document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                    document.querySelector("#Replay").innerHTML = "Replay";
+                    return;
+                }
+
+                if (findDraw()) {
+                    gameOver = true;
+                    document.querySelector("#winMsg").innerHTML = "Cats Game";
+                    document.querySelector("#Replay").innerHTML = "Replay";
+
+                    return;
+                }
+                // get computer move
+
+                setTimeout(computerMove, time);
+            }
+            // single player mode, computer goes first
+            else if (gameOver == false && onePlyr == true && computerFirst == true && turn == true) {
+
+                // check if spot is already taken
+                if (box == "X" || box == "O") {
+                    // make so player can pick again
+                    turn = true;
+                    return;
+                }
+                // computer mark already marked, by reset button being hit, or toggling button
+                // mark the spot player has chosen
+                document.getElementById(id).innerHTML = playerMark;
+
+                // just to get player going working on computer first
+                player++;
+
+                // playerMoves++;
+                turn = false;
+
+                // remove spot off list
+                removeSpot(id);
+
+                // cheeck for player win, computer win, and a draw
+                if (findWinner("X")) {
+                    document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                    document.querySelector("#Replay").innerHTML = "Replay";
+                    xWins++;
+                    document.getElementById("xTotal").innerHTML = xWins;
+                    return;
+                }
+
+                // check for computer win
+                if (findWinner("O")) {
+                    document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                    document.querySelector("#Replay").innerHTML = "Replay";
+                    return;
+                }
+
+                if (findDraw()) {
+                    gameOver = true;
+                    document.querySelector("#winMsg").innerHTML = "Cats Game";
+                    document.querySelector("#Replay").innerHTML = "Replay";
+
+                    return;
+                }
+
+                // get computer move
+                setTimeout(computerMove2, time);
+                // just to get player going working on computer first
+                player++;
+
+            }
+
+            // two player mode
+            else {
+                // get players spot choice
+                if (gameOver == false && onePlyr == false) {
+                    // get player turn
+                    if (player % 2 != 0) {
+                        playerMark = "X";
+                    }
+                    if (player % 2 == 0) {
+                        playerMark = "O";
+                    }
+                    // mark spots if valid pick
+                    // if (box == "X" || box == "O")
+                    // {
+
+                    // }
+                    // place valid move
+                    if (box == " ") {
+                        document.getElementById(id).innerHTML = playerMark;
+                        player++;
+                    }
+                    // check for winners
+                    if (findWinner("X")) {
+                        // alert(" player X is winnerererer");
+                        document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                        document.querySelector("#Replay").style.display = "block";
+                        xWins++;
+                        document.getElementById("xTotal").innerHTML = xWins;
+                        return;
+
+                    }
+                    if (findWinner("O")) {
+                        // alert(" player O is winnerererer");
+                        document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                        document.querySelector("#Replay").style.display = "block";
+                        oWins++;
+                        document.getElementById("oTotal").innerHTML = oWins;
+                        return;
+                    }
+                    if (findDraw()) {
+                        gameOver = true;
+                        document.querySelector("#winMsg").innerHTML = "Cats Game";
+                        document.querySelector("#Replay").innerHTML = "Replay";
+                        return;
+                    }
+                }
+            }
+        }
+
+        function computerMove() {
+            playSoundY();
+            // get level
+            let level = document.getElementById("hardness").value;
+
+            // computer move
+            let spotBlock = blockWin(); // used in else if func below
+            let computerMark = "O";
+            let winMove = takeWin();
+
+            // get valid spot
+            let computerMoveSpot = spotList[Math.floor(Math.random() * spotList.length)];
+
+            // place the spot the computer picked
+            if (middleOpen() == true && level == "medium") {
+                document.getElementById("4").innerHTML = computerMark;
+                removeSpot(4);
+
+            }
+            else if (takeWin() != 99 && level != "easy") {
+
+                document.getElementById(takeWin()).innerHTML = computerMark;
+                removeSpot(winMove);
+            }
+
+            else if (spotBlock != 88) {
+
+                if (spotBlock == 3 || spotBlock == 5 || spotBlock == 1 || spotBlock == 7 || spotBlock == 4) { // middle spots open
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+                else if (spotBlock == 2 || spotBlock == 0 || spotBlock == 6 || spotBlock == 8 || spotBlock == 3 || spotBlock == 5) { // top ,bottom , and middle rows for end spots
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+                else if (spotBlock == 0 || spotBlock == 6 || spotBlock == 1 || spotBlock == 7 || spotBlock == 2 || spotBlock == 8) { // col end spots
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+                else if (spotBlock == 0 || spotBlock == 8 || spotBlock == 2 || spotBlock == 6) {
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+            }
+
+            else if (strategy1() != 101 && (level == "hard" || level == "super-hard" || level == "impossible")) {
+                // need move, because calling strategy() to write spot and remove, gets different spot number since its a random number generator lol....
+                move = strategy1();
+                document.getElementById(move).innerHTML = computerMark;
+                removeSpot(move);
+            }
+            else if (strategy2() && (level == "hard" || level == "super-hard" || level == "impossible") && playerMoves == 2) {
+                document.getElementById("4").innerHTML = computerMark;
+                removeSpot(4);
+            }
+            else if ((level == "super-hard" || level == "impossible") && playerMoves == 2 && strategy2_1()) {
+                // need diagSpot beacuse strategy2_1 returns a random num
+                let diagSpot = strategy2_1();
+                document.getElementById(diagSpot).innerHTML = computerMark;
+                removeSpot(diagSpot);
+            }
+            // if moves == 2, and mdidle is open, pick middle
+            else if ((level == "super-hard" || level == "impossible") && playerMoves == 2 && middleOpen()) {
+                // alert("in");
+                document.getElementById("4").innerHTML = computerMark;
+                removeSpot(4);
+                // alert("out");
+            }
+            // at this point, anything on level super-hard and up will have middle chosen already
+            else if (level == "impossible" && playerMoves == 2 && makeBlockWin() != 99) {
+                let makeBlock = makeBlockWin();
+                document.getElementById(makeBlock).innerHTML = computerMark;
+                removeSpot(makeBlock);
+
+                // Picks a spot where there is one "O" and two " "'s
+                // aka ->| 0 - - |or | - O - |or |- -O |
+            }
+
+            else {
+                // just a random pick now
+                document.getElementById(computerMoveSpot).innerHTML = computerMark;
+                removeSpot(computerMoveSpot);
+            }
+
+            // let other play move now, or just show its his move, even if game is over
+            turn = true;
+
+            // check for player winner, computer win, and draw
+            if (findWinner("X")) {
+                document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                document.querySelector("#Replay").innerHTML = "Replay";
+                return;
+            }
+
+            // check for computer win
+            if (findWinner("O")) {
+                document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                document.querySelector("#Replay").innerHTML = "Replay";
+                oWins++;
+                document.getElementById("oTotal").innerHTML = oWins;
+                return;
+            }
+            // check for draw
+            if (findDraw()) {
+                gameOver = true;
+                document.querySelector("#winMsg").innerHTML = "Cats Game";
+                document.querySelector("#Replay").innerHTML = "Replay";
+                return;
+            }
+        }
+        function computerMove2() {
+            // console.log(playerMoves);
+            playSoundY();
+            // get level
+            let level = document.getElementById("hardness").value;
+
+            // make reset button appear
+            document.querySelector("#Replay").innerHTML = "Replay";
+            document.querySelector("#Replay").style.display = "block";
+
+            // get valid spot
+            let computerMoveSpot = spotList[Math.floor(Math.random() * spotList.length)];
+            let computerMark = "O";
+            let winMove = takeWin();
+            let spotBlock = blockWin(); // used in else if func below
+
+            // take win if possible
+            if (takeWin() != 99 && level != "easy") {
+
+                document.getElementById(takeWin()).innerHTML = computerMark;
+                removeSpot(winMove);
+            }
+
+            // block win
+            else if (spotBlock != 88) {
+
+                if (spotBlock == 3 || spotBlock == 5 || spotBlock == 1 || spotBlock == 7 || spotBlock == 4) { // middle spots open
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+                else if (spotBlock == 2 || spotBlock == 0 || spotBlock == 6 || spotBlock == 8 || spotBlock == 3 || spotBlock == 5) { // top ,bottom , and middle rows for end spots
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+                else if (spotBlock == 0 || spotBlock == 6 || spotBlock == 1 || spotBlock == 7 || spotBlock == 2 || spotBlock == 8) { // col end spots
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+                else if (spotBlock == 0 || spotBlock == 8 || spotBlock == 2 || spotBlock == 6) {
+                    document.getElementById(blockWin()).innerHTML = computerMark;
+                    removeSpot(spotBlock);
+                }
+            }
+            // take middle
+            else if (middleOpen() && (level == "impossible" || level == "super-hard")) {
+                document.getElementById("4").innerHTML = computerMark;
+                removeSpot(4);
+            }
+            // make the second move a diagonal
+            else if (playerMoves === 1 && level == "impossible") {
+
+                // get corner spots and push available corners to a new list
+                const diagonal_spots = [0, 2, 6, 8];
+                const diagonals_available = [];
+                // if diagonal_pots in spotList, push to list
+                diagonal_spots.forEach(spot => {
+                    if (spotList.includes(spot)) {
+                        diagonals_available.push(spot);
+                    }
+                })
+                // get random spot
+                let computerMoveSpot = diagonals_available[Math.floor(Math.random() * diagonals_available.length)];
+                document.getElementById(computerMoveSpot).innerHTML = computerMark;
+                removeSpot(computerMoveSpot);
+
+
+                // console.log(diagonals_available);
+            }
+
+
+            // place and remove spot
+            else {
+                document.getElementById(computerMoveSpot).innerHTML = computerMark;
+                removeSpot(computerMoveSpot);
+            }
+
+            playerMoves++;
+            turn = true;
+
+            // cheeck for player win, computer win, and a draw
+            if (findWinner("X")) {
+                document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                document.querySelector("#Replay").innerHTML = "Replay";
+                xWins++;
+                document.getElementById("xTotal").innerHTML = xWins;
+                return;
+            }
+
+            // check for computer win
+            if (findWinner("O")) {
+                document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                document.querySelector("#Replay").innerHTML = "Replay";
+                oWins++;
+                document.getElementById("oTotal").innerHTML = oWins;
+                return;
+            }
+
+            if (findDraw()) {
+                gameOver = true;
+                document.querySelector("#winMsg").innerHTML = "Cats Game";
+                document.querySelector("#Replay").innerHTML = "Replay";
+
+                return;
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

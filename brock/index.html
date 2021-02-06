@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./style.css">
+
+    <title>Barracos</title>
+</head>
+
+<body>
+    <div id="container">
+        <form id="form">
+            <div class="fields">
+                <label for="subTotal"><span>*</span>SubTotal</label>
+                <input id="subtotal" class="required" name="subTotal" placeholder="subtotal" type="number" step=".01"
+                    required>
+                <label for="onlineDiscount" class="not_required">Online Discount</label>
+                <input id="onlineDiscount" name="onlineDiscount" placeholder="online discount" type="number" step=".01">
+                <label for="otherDiscounts" class="not_required">Other Discounts</label>
+                <input id="otherDiscounts" name="otherDiscounts" placeholder="other discounts" type="number" step=".01">
+                <label for="taxAmount"><span>*</span>Tax Amount</label>
+                <input id="taxAmount" class="required" name="taxAmount" placeholder="tax amount" type="number"
+                    step=".01" required>
+                <label class="required" for="originalTotal"><span>*</span>Original Total</label>
+                <input id="originalTotal" class="required" name="originalTotal" placeholder="original total"
+                    type="number" step=".01" required>
+                <button type="submit">Calculate</button>
+            </div>
+        </form>
+    </div>
+    <table>
+    </table>
+    <!-- <span class="fas-stack">
+        <i class="fas fa-comment fa-stack-2x"></i>
+        <i class="fas fas-stack-1x"></i>
+    </span> -->
+
+    <script src="https://kit.fontawesome.com/9dfb5e85b0.js" crossorigin="anonymous"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
