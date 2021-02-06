@@ -559,12 +559,16 @@ function three() {
 
 function removeTimerButtons() {
     // reinstore bottom DONE button font color
-    document.querySelector("#done").classList.add("turnFontWhite");
+
+    //  BUG FIX -> done buttons disappears/ reappears when replay clicked the 1st time
+    // just had to comment out line below to FIX...
+    // document.querySelector("#done").classList.add("turnFontWhite");
+
     document.querySelector("#done").classList.remove("turnFontBlack");
 
     const buttons = document.querySelector(".buttons");
     timerButtonsShowing = false;
-    buttons.style.visibility = "hidden"
+    buttons.style.visibility = "hidden";
     buttons.classList.remove("reappear");
     document.querySelectorAll(".open").forEach(item => {
         item.classList.remove("disappear");
