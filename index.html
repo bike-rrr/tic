@@ -503,7 +503,8 @@ test to see if this is working.-->
         let player = 1;
         let mute = true;
         let computerFirst = false;
-        let preventDoubleO;
+        let preventDoubleOgo2nd;
+        let preventDoubleOgo1st;
 
         function findWinner(letter) {       //row winners -> col winners-> diag winners is the order
             const winners = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]]
@@ -810,7 +811,8 @@ test to see if this is working.-->
 
         function reset() {
             // prevent doouble O
-            clearTimeout(preventDoubleO);
+            clearTimeout(preventDoubleOgo2nd);
+            clearTimeout(preventDoubleOgo1st);
 
             // kill music
             document.getElementById("loserSound").pause();
@@ -1246,7 +1248,8 @@ test to see if this is working.-->
                 }
                 // get computer move
 
-                setTimeout(computerMove, time);
+                // setTimeout(computerMove, time);
+                preventDoubleOgo1st = setTimeout(computerMove, time);
             }
             // single player mode, computer goes first
             else if (gameOver == false && onePlyr == true && computerFirst == true && turn == true) {
@@ -1295,7 +1298,7 @@ test to see if this is working.-->
                 }
 
                 // get computer move
-                preventDoubleO = setTimeout(computerMove2, time);
+                preventDoubleOgo2nd = setTimeout(computerMove2, time);
                 // just to get player going working on computer first
                 player++;
 
