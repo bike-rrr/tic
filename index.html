@@ -479,7 +479,10 @@ test to see if this is working.-->
                 document.getElementById("oTotal").innerHTML = oWins;
                 draws = 0;
                 document.getElementById("catsTotal").innerHTML = draws;
-                console.log("hereee")
+
+                // so score doesnt update if we changed modes fast from 2player
+                clearTimeout(winDelayScoreUpdate)
+
             }
 
             // enable levels again
@@ -520,6 +523,8 @@ test to see if this is working.-->
         let preventDoubleOgo1st;
         let mobile;
         let previousModeSingle = true;
+        let winDelayScoreUpdate;
+        let tieDelayScoreUpdate;
 
         // check mobile device or not for the hover effect class
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -545,6 +550,7 @@ test to see if this is working.-->
                     }
                 }
                 if (winner) {
+                    winDelayScoreUpdate = setTimeout(winUpdateDelay, 900, letter);
 
                     boardAnimation();
 
@@ -676,6 +682,8 @@ test to see if this is working.-->
 
         function findDraw() {
             if (playerMoves == 5 || player == 10) {
+                tieDelayScoreUpdate = setTimeout(tieUpdateDelay, 900);
+
                 removeHover();
                 gameOver = true;
                 drawGraphic();
@@ -715,7 +723,6 @@ test to see if this is working.-->
             }
             console.log(winSpots, loserSpots);
             // turn on smaller animations for non winner spots
-
         }
 
         // need to use this function, beacuse findWinningLine runs the ShowWinning line and turns winspots black too soon
@@ -769,11 +776,11 @@ test to see if this is working.-->
                     // added to show wins after win graphic plays
                     if (x == 3) {
                         if (letter === "X") {
-                            xWins++;
-                            document.getElementById("xTotal").innerHTML = xWins;
+                            // xWins++;
+                            // document.getElementById("xTotal").innerHTML = xWins;
                         } else {
-                            oWins++;
-                            document.getElementById("oTotal").innerHTML = oWins;
+                            // oWins++;
+                            // document.getElementById("oTotal").innerHTML = oWins;
                         }
 
                         stopLightup = true;
@@ -790,6 +797,21 @@ test to see if this is working.-->
             }
         }
 
+        function winUpdateDelay(letter) {
+            if (letter === "X") {
+                xWins++;
+                document.getElementById("xTotal").innerHTML = xWins
+            } else {
+                oWins++;
+                document.getElementById("oTotal").innerHTML = oWins
+            }
+        }
+
+        function tieUpdateDelay() {
+            draws++;
+            document.getElementById("catsTotal").innerHTML = draws;
+        }
+
         function turnAllBlack() {
             for (let i = 0; i < 9; i++) {
                 document.getElementById(i).style.backgroundColor = "black";
@@ -797,6 +819,7 @@ test to see if this is working.-->
         }
 
         function drawGraphic() {
+
             let drawInterval = setInterval(blink, 100);
             let stopBlink = false;
             let y = 0;
@@ -825,8 +848,8 @@ test to see if this is working.-->
 
                     y++;
                     if (y == 8) {
-                        draws++;
-                        document.getElementById("catsTotal").innerHTML = draws;
+                        // draws++;
+                        // document.getElementById("catsTotal").innerHTML = draws;
                         y = 0;
                         stopBlink = true;
                         clearInterval(drawInterval);
@@ -893,6 +916,8 @@ test to see if this is working.-->
             if (mode.value === "2player") {
                 togglePlayer();
                 previousModeSingle = false;
+                clearTimeout(winDelayScoreUpdate)
+                clearTimeout(tieDelayScoreUpdate)
             }
             else {
                 changeComputerTurn();
