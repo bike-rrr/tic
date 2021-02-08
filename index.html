@@ -347,15 +347,15 @@ test to see if this is working.-->
 
 <body>
     <div class="container">
-        <div class="center-align hover zero" id="0" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover one" id="1" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover two" id="2" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover three" id="3" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover" id="4" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover five" id="5" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover six" id="6" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover seven" id="7" onclick="playSoundX(this); change(this);"> </div>
-        <div class="center-align hover eight" id="8" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align zero" id="0" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align one" id="1" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align two" id="2" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align three" id="3" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align" id="4" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align five" id="5" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align six" id="6" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align seven" id="7" onclick="playSoundX(this); change(this);"> </div>
+        <div class="center-align eight" id="8" onclick="playSoundX(this); change(this);"> </div>
 
         <div class="button-wrapper">
             <div class="bottom-button" id="difficulty">
@@ -511,11 +511,12 @@ test to see if this is working.-->
         // check mobile device or not for the hover effect class
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
             // true for mobile device
-            document.write("mobile device");
             mobile = true;
         } else {
             // false for not mobile device
-            document.write("not mobile device");
+            document.querySelectorAll(".center-align").forEach(item => {
+                item.classList.add("hover");
+            })
             mobile = false;
         }
 
