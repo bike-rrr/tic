@@ -471,6 +471,17 @@ test to see if this is working.-->
         }
 
         function changeComputerTurn() {
+            // reset scores if coming from 2 player
+            if (previousModeSingle === false) {
+                xWins = 0;
+                document.getElementById("xTotal").innerHTML = xWins;
+                oWins = 0;
+                document.getElementById("oTotal").innerHTML = oWins;
+                draws = 0;
+                document.getElementById("catsTotal").innerHTML = draws;
+                console.log("hereee")
+            }
+
             // enable levels again
             document.getElementById("hardness").disabled = false;
             onePlyr = true;
@@ -488,6 +499,7 @@ test to see if this is working.-->
                 document.getElementById("medium").disabled = false;
                 document.getElementById("superHard").disabled = false;
             }
+
             reset();
         }
 
@@ -507,6 +519,7 @@ test to see if this is working.-->
         let preventDoubleOgo2nd;
         let preventDoubleOgo1st;
         let mobile;
+        let previousModeSingle = true;
 
         // check mobile device or not for the hover effect class
         if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
@@ -666,8 +679,8 @@ test to see if this is working.-->
                 removeHover();
                 gameOver = true;
                 drawGraphic();
-                draws++;
-                document.getElementById("catsTotal").innerHTML = draws;
+                // draws++;
+                // document.getElementById("catsTotal").innerHTML = draws;
                 playCats();
                 // scroll down so we can hit replay
                 smallWindowScroll()
@@ -753,7 +766,16 @@ test to see if this is working.-->
 
                     }
                     x++;
+                    // added to show wins after win graphic plays
                     if (x == 3) {
+                        if (letter === "X") {
+                            xWins++;
+                            document.getElementById("xTotal").innerHTML = xWins;
+                        } else {
+                            oWins++;
+                            document.getElementById("oTotal").innerHTML = oWins;
+                        }
+
                         stopLightup = true;
                         clearInterval(line);
                         if (gameOver) {
@@ -803,6 +825,8 @@ test to see if this is working.-->
 
                     y++;
                     if (y == 8) {
+                        draws++;
+                        document.getElementById("catsTotal").innerHTML = draws;
                         y = 0;
                         stopBlink = true;
                         clearInterval(drawInterval);
@@ -868,11 +892,13 @@ test to see if this is working.-->
             const mode = document.querySelector("#routeChange");
             if (mode.value === "2player") {
                 togglePlayer();
+                previousModeSingle = false;
             }
             else {
                 changeComputerTurn();
+                previousModeSingle = true;
             }
-            console.log(mode.value)
+            // console.log(mode.value)
         }
 
         function resetMultiPlayerToggle() {
@@ -899,6 +925,9 @@ test to see if this is working.-->
                 document.getElementById("xTotal").innerHTML = "0";
                 document.getElementById("oTotal").innerHTML = "0";
                 document.getElementById("catsTotal").innerHTML = "0";
+                xWins = 0;
+                oWins = 0;
+                draws = 0;
 
                 // hide difficulty levels
                 // added after added small because spwithcing to 2 player left text still small
@@ -1247,8 +1276,8 @@ test to see if this is working.-->
                 if (findWinner("X")) {
                     // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                     document.querySelector("#Replay").innerHTML = "Replay";
-                    xWins++;
-                    document.getElementById("xTotal").innerHTML = xWins;
+                    // xWins++;
+                    // document.getElementById("xTotal").innerHTML = xWins;
                     return;
                 }
 
@@ -1297,8 +1326,8 @@ test to see if this is working.-->
                 if (findWinner("X")) {
                     // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                     document.querySelector("#Replay").innerHTML = "Replay";
-                    xWins++;
-                    document.getElementById("xTotal").innerHTML = xWins;
+                    // xWins++;
+                    // document.getElementById("xTotal").innerHTML = xWins;
                     return;
                 }
 
@@ -1345,8 +1374,8 @@ test to see if this is working.-->
                         // alert(" player X is winnerererer");
                         // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                         document.querySelector("#Replay").style.display = "block";
-                        xWins++;
-                        document.getElementById("xTotal").innerHTML = xWins;
+                        // xWins++;
+                        // document.getElementById("xTotal").innerHTML = xWins;
                         return;
 
                     }
@@ -1354,8 +1383,8 @@ test to see if this is working.-->
                         // alert(" player O is winnerererer");
                         // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                         document.querySelector("#Replay").style.display = "block";
-                        oWins++;
-                        document.getElementById("oTotal").innerHTML = oWins;
+                        // oWins++;
+                        // document.getElementById("oTotal").innerHTML = oWins;
                         return;
                     }
                     if (findDraw()) {
@@ -1468,8 +1497,8 @@ test to see if this is working.-->
             if (findWinner("O")) {
                 // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                 document.querySelector("#Replay").innerHTML = "Replay";
-                oWins++;
-                document.getElementById("oTotal").innerHTML = oWins;
+                // oWins++;
+                // document.getElementById("oTotal").innerHTML = oWins;
                 return;
             }
             // check for draw
@@ -1568,8 +1597,8 @@ test to see if this is working.-->
             if (findWinner("O")) {
                 // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                 document.querySelector("#Replay").innerHTML = "Replay";
-                oWins++;
-                document.getElementById("oTotal").innerHTML = oWins;
+                // oWins++;
+                // document.getElementById("oTotal").innerHTML = oWins;
                 return;
             }
 
