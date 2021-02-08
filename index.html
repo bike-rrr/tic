@@ -398,7 +398,7 @@ test to see if this is working.-->
         </div>
 
     </div>
-    <div class="winner-status" id="winMsg"></div>
+    <!-- <div class="winner-status" id="winMsg"></div> -->
     <p></p>
 
     <audio preload="auto" id="playX" src="https://www.soundjay.com/button/sounds/button-50.mp3"></audio>
@@ -825,7 +825,7 @@ test to see if this is working.-->
 
             playerMoves = 0;
             gameOver = false;
-            document.querySelector("#winMsg").innerHTML = " ";
+            // document.querySelector("#winMsg").innerHTML = " ";
             spotList = [0, 1, 2, 3, 4, 5, 6, 7, 8];
             turn = true;
             player = 1;
@@ -862,7 +862,7 @@ test to see if this is working.-->
             }
             playerMoves = 0;
             gameOver = false;
-            document.querySelector("#winMsg").innerHTML = " ";
+            // document.querySelector("#winMsg").innerHTML = " ";
             spotList = [0, 1, 2, 3, 4, 5, 6, 7, 8];
             turn = true;
             player = 1;
@@ -1225,7 +1225,7 @@ test to see if this is working.-->
 
                 // check for player win, computer win, and a draw
                 if (findWinner("X")) {
-                    document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                    // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                     document.querySelector("#Replay").innerHTML = "Replay";
                     xWins++;
                     document.getElementById("xTotal").innerHTML = xWins;
@@ -1234,14 +1234,14 @@ test to see if this is working.-->
 
                 // check for computer win
                 if (findWinner("O")) {
-                    document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                    // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                     document.querySelector("#Replay").innerHTML = "Replay";
                     return;
                 }
 
                 if (findDraw()) {
                     gameOver = true;
-                    document.querySelector("#winMsg").innerHTML = "Cats Game";
+                    // document.querySelector("#winMsg").innerHTML = "Cats Game";
                     document.querySelector("#Replay").innerHTML = "Replay";
 
                     return;
@@ -1275,7 +1275,7 @@ test to see if this is working.-->
 
                 // cheeck for player win, computer win, and a draw
                 if (findWinner("X")) {
-                    document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                    // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                     document.querySelector("#Replay").innerHTML = "Replay";
                     xWins++;
                     document.getElementById("xTotal").innerHTML = xWins;
@@ -1284,14 +1284,14 @@ test to see if this is working.-->
 
                 // check for computer win
                 if (findWinner("O")) {
-                    document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                    // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                     document.querySelector("#Replay").innerHTML = "Replay";
                     return;
                 }
 
                 if (findDraw()) {
                     gameOver = true;
-                    document.querySelector("#winMsg").innerHTML = "Cats Game";
+                    // document.querySelector("#winMsg").innerHTML = "Cats Game";
                     document.querySelector("#Replay").innerHTML = "Replay";
 
                     return;
@@ -1323,7 +1323,7 @@ test to see if this is working.-->
                     // check for winners
                     if (findWinner("X")) {
                         // alert(" player X is winnerererer");
-                        document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                        // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                         document.querySelector("#Replay").style.display = "block";
                         xWins++;
                         document.getElementById("xTotal").innerHTML = xWins;
@@ -1332,7 +1332,7 @@ test to see if this is working.-->
                     }
                     if (findWinner("O")) {
                         // alert(" player O is winnerererer");
-                        document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                        // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                         document.querySelector("#Replay").style.display = "block";
                         oWins++;
                         document.getElementById("oTotal").innerHTML = oWins;
@@ -1340,7 +1340,7 @@ test to see if this is working.-->
                     }
                     if (findDraw()) {
                         gameOver = true;
-                        document.querySelector("#winMsg").innerHTML = "Cats Game";
+                        // document.querySelector("#winMsg").innerHTML = "Cats Game";
                         document.querySelector("#Replay").innerHTML = "Replay";
                         return;
                     }
@@ -1439,14 +1439,14 @@ test to see if this is working.-->
 
             // check for player winner, computer win, and draw
             if (findWinner("X")) {
-                document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                 document.querySelector("#Replay").innerHTML = "Replay";
                 return;
             }
 
             // check for computer win
             if (findWinner("O")) {
-                document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                 document.querySelector("#Replay").innerHTML = "Replay";
                 oWins++;
                 document.getElementById("oTotal").innerHTML = oWins;
@@ -1455,7 +1455,7 @@ test to see if this is working.-->
             // check for draw
             if (findDraw()) {
                 gameOver = true;
-                document.querySelector("#winMsg").innerHTML = "Cats Game";
+                // document.querySelector("#winMsg").innerHTML = "Cats Game";
                 document.querySelector("#Replay").innerHTML = "Replay";
                 return;
             }
@@ -1537,7 +1537,7 @@ test to see if this is working.-->
 
             // cheeck for player win, computer win, and a draw
             if (findWinner("X")) {
-                document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
+                // document.querySelector("#winMsg").innerHTML = "PLAYER 'X' WINS";
                 document.querySelector("#Replay").innerHTML = "Replay";
                 xWins++;
                 document.getElementById("xTotal").innerHTML = xWins;
@@ -1546,7 +1546,7 @@ test to see if this is working.-->
 
             // check for computer win
             if (findWinner("O")) {
-                document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
+                // document.querySelector("#winMsg").innerHTML = "PLAYER 'O' WINS";
                 document.querySelector("#Replay").innerHTML = "Replay";
                 oWins++;
                 document.getElementById("oTotal").innerHTML = oWins;
@@ -1555,7 +1555,7 @@ test to see if this is working.-->
 
             if (findDraw()) {
                 gameOver = true;
-                document.querySelector("#winMsg").innerHTML = "Cats Game";
+                // document.querySelector("#winMsg").innerHTML = "Cats Game";
                 document.querySelector("#Replay").innerHTML = "Replay";
 
                 return;
