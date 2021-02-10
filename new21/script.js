@@ -192,7 +192,7 @@ function restoreDots() {
 function resetFlags() {
     killTimeouts(computerPicks);
     killIntervals();
-    // removeTimerButtons();
+    removeTimerButtons();
     gameIsOver = false;
 
     // remove opponentDisappear class...class woul remain if replay was hit killing a timeout that removed that class
