@@ -108,8 +108,8 @@ document.querySelector("#done").onclick = () => {
 
 // show whos turn it is
 function showTurn() {
-    restoreDots();
 
+    restoreDots();
     const player1 = document.querySelector(".one");
     const player2 = document.querySelector(".two");
     const p1 = document.querySelector(".p1");
@@ -119,6 +119,7 @@ function showTurn() {
         // shows dots
         p2.classList.remove("reappear");
         p2.classList.add("disappear")
+        p1.classList.add("reappear")
 
         // so dots dont animate on first page load
         p1.style.visibility = "visible"
