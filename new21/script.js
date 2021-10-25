@@ -1,4 +1,4 @@
-
+// test to see if i can push now
 // set flags onto screen
 function loadFlags() {
     for (let i = 0; i < 21; i++) {
