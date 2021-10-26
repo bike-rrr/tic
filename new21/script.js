@@ -26,7 +26,7 @@ function showBottomBtns() {
         setTimeout(() => {
             document.querySelector(".lower").style.visibility = "visible";
             console.log('22')
-        }, 200)
+        }, 0)
     })
 }
 
