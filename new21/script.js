@@ -14,7 +14,10 @@ const loadFlags = new Promise(res => {
 })
 
 
-loadFlags.then(() => showBottomBtns())
+loadFlags
+    .then(() => {
+        showBottomBtns()
+    });
 
 console.log("1")
 // this is done to fix the flickering of bottom buttons on page load and fast reload
