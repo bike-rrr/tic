@@ -40,6 +40,7 @@ let timers = [];
 let timerButtonsShowing = false;
 let gameIsOver = false;
 let timerSeconds = parseInt(document.querySelector("#timer").value);
+let greenBtn = false;
 
 seeWhoGoesFirst();
 const turnPlayer1 = "1 goes first";
@@ -474,15 +475,35 @@ function showButtons() {
         buttons.classList.remove("disappear");
         buttons.style.visibility = "visible";
         buttons.classList.add("reappear");
+
+        // change buttons color border to red
+        const btns = document.querySelectorAll(".timerButton");
+        btns.forEach(item => {
+            item.style.borderColor = "red";
+            item.style.boxShadow = "4px 4px 4px #b50909";
+        });
+
+        // wait 1 sec and change to green
+        setTimeout(() => {
+            btns.forEach(item => {
+                item.style.borderColor = "green";
+                item.style.boxShadow = "4px 4px 4px #14782a";
+            });
+            greenBtn = true;
+        }, 1000);
+
+
         document.querySelectorAll(".timerButton").forEach(item => {
             item.onclick = () => {
+                if (!greenBtn) { return };
                 timerButtonsShowing = false;
                 placeTimerChoiceMoves(item.innerHTML);
                 removeTimerButtons();
                 flags.forEach(item => {
                     item.classList.remove("disappear");
                     item.classList.add("reappear")
-                })
+                });
+                greenBtn = false;
             }
         })
     }, 200))
