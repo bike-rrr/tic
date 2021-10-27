@@ -483,12 +483,13 @@ function showButtons() {
             item.style.boxShadow = "4px 4px 4px #b50909";
         });
 
-        // wait 1 sec and change to green
+        // wait 1 sec and change to green so we dont accidentally click button trying to click flag instead, need delay
         setTimeout(() => {
             btns.forEach(item => {
                 item.style.borderColor = "green";
                 item.style.boxShadow = "4px 4px 4px #14782a";
             });
+            // now we can click
             greenBtn = true;
         }, 1000);
 
@@ -503,6 +504,7 @@ function showButtons() {
                     item.classList.remove("disappear");
                     item.classList.add("reappear")
                 });
+                // make so we cant click until it turns green again
                 greenBtn = false;
             }
         })
