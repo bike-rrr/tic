@@ -202,6 +202,7 @@ function resetFlags() {
     killIntervals();
     removeTimerButtons();
     gameIsOver = false;
+    greenBtn = false;
 
     // remove opponentDisappear class...class woul remain if replay was hit killing a timeout that removed that class
     document.querySelectorAll("img").forEach(item => {
