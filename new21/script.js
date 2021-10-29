@@ -10,6 +10,7 @@ const loadFlags = new Promise(res => {
         const board = document.querySelector(".board");
         board.appendChild(image);
     }
+    console.log('done loading flags')
     res('sucess')
 })
 
@@ -25,7 +26,7 @@ function showBottomBtns() {
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
             document.querySelector(".lower").style.display = "inline";
-            console.log('22')
+            console.log('added buttons')
         }, 0)
     })
 }
