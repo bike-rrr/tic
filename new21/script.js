@@ -26,7 +26,7 @@ function showBottomBtns() {
         setTimeout(() => {
             document.querySelector(".lower").style.display = "inline";
             console.log('22')
-        }, 90)
+        }, 0)
     })
 }
 
