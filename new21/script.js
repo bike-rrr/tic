@@ -24,7 +24,7 @@ console.log("1")
 function showBottomBtns() {
     document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => {
-            document.querySelector(".lower").style.visibility = "visible";
+            document.querySelector(".lower").style.display = "inline";
             console.log('22')
         }, 0)
     })
