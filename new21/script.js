@@ -21,7 +21,6 @@ loadFlags
         console.log("2-finished promise")
         showBottomBtns()
         console.log("4done")
-        return true;
     });
 
 console.log("9")
@@ -30,7 +29,6 @@ function showBottomBtns() {
 
     document.querySelector(".lower").style.visibility = "visible";
     console.log('3-added buttons')
-    return true;
 }
 
 let count = 0;
