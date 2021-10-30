@@ -1,6 +1,6 @@
 // test to see if i can push now
 // set flags onto screen
-document.querySelector("body").style.backgroundColor = "yellow"
+document.querySelector("body").style.backgroundColor = "purple"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
@@ -21,6 +21,7 @@ loadFlags
         console.log("2-finished promise")
         showBottomBtns()
         console.log("4done")
+        return true;
     });
 
 console.log("9")
@@ -29,7 +30,7 @@ function showBottomBtns() {
 
     document.querySelector(".lower").style.visibility = "visible";
     console.log('3-added buttons')
-
+    return true;
 }
 
 let count = 0;
