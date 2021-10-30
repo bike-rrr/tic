@@ -1,6 +1,6 @@
 // test to see if i can push now
 // set flags onto screen
-document.querySelector("body").style.backgroundColor = "red"
+document.querySelector("body").style.backgroundColor = "blue"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
@@ -27,7 +27,7 @@ console.log("9")
 // this is done to fix the flickering of bottom buttons on page load and fast reload
 function showBottomBtns() {
 
-    document.querySelector(".lower").style.display = "inline";
+    document.querySelector(".lower").style.visibility = "visible";
     console.log('3-added buttons')
 
 }
