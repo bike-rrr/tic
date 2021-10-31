@@ -19,13 +19,13 @@ const loadFlags = new Promise(res => {
 
 
 loadFlags
-// .then(() => {
-console.log("2-finished promise")
-setTimeout(() => {
+    .then(() => {
+        console.log("2-finished promise")
+        setTimeout(() => {
 
-    showBottomBtns()
-}, 100);
-console.log("4done")
+            showBottomBtns()
+        }, 100);
+        console.log("4done")
     });
 
 console.log("9")
