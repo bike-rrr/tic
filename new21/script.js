@@ -10,7 +10,7 @@ const loadFlags = new Promise(res => {
         image.style.borderRadius = "70px";
         const board = document.querySelector(".board");
         board.appendChild(image);
-        board.style.height = '50vh'
+        board.style.height = 'auto';
     }
     console.log('1-done loading flags')
     res('sucess')
