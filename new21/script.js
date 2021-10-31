@@ -10,7 +10,7 @@ setInterval(() => {
 
 }, 50);
 
-document.querySelector("body").style.backgroundColor = "red"
+document.querySelector("body").style.backgroundColor = "orange"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
