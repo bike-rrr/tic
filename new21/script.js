@@ -1,6 +1,6 @@
 // test to see if i can push now
 // set flags onto screen
-// document.querySelector("body").style.backgroundColor = "blue"
+document.querySelector("body").style.backgroundColor = "blue"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
@@ -11,6 +11,7 @@ const loadFlags = new Promise(res => {
         const board = document.querySelector(".board");
         board.appendChild(image);
         board.style.height = 'auto';
+        console.log(image.height)
     }
     console.log('1-done loading flags')
     res('sucess')
@@ -18,10 +19,13 @@ const loadFlags = new Promise(res => {
 
 
 loadFlags
-    .then(() => {
-        console.log("2-finished promise")
-        showBottomBtns()
-        console.log("4done")
+// .then(() => {
+console.log("2-finished promise")
+setTimeout(() => {
+
+    showBottomBtns()
+}, 100);
+console.log("4done")
     });
 
 console.log("9")
