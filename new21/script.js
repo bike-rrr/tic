@@ -1,6 +1,6 @@
 // test to see if i can push now
 // set flags onto screen
-document.querySelector("body").style.backgroundColor = "purple"
+document.querySelector("body").style.backgroundColor = "green"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
