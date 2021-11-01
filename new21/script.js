@@ -1,6 +1,6 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("purple")
+console.log("blue")
 const board = document.querySelectorAll(".board img");
 const flagLoadCheck = setInterval(() => {
     const len = document.querySelectorAll(".board img").length;
@@ -9,13 +9,13 @@ const flagLoadCheck = setInterval(() => {
         console.log("flasgs loades")
         setTimeout(() => {
             document.querySelector(".lower").style.visibility = "visible";
-        }, 400)
+        }, 150)
         clearInterval(flagLoadCheck)
     }
 
 }, 50);
 
-document.querySelector("body").style.backgroundColor = "purple"
+document.querySelector("body").style.backgroundColor = "blue"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
