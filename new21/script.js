@@ -1,5 +1,6 @@
 // test to see if i can push now
 // set flags onto screen
+console.log("teal")
 const board = document.querySelectorAll(".board img");
 const flagLoadCheck = setInterval(() => {
     const len = document.querySelectorAll(".board img").length;
