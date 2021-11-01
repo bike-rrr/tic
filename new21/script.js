@@ -11,9 +11,9 @@ const flagLoadCheck = setInterval(() => {
         clearInterval(flagLoadCheck)
     }
 
-}, 50);
+}, 800);
 
-document.querySelector("body").style.backgroundColor = "teal"
+document.querySelector("body").style.backgroundColor = "red"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
