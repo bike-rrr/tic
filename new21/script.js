@@ -8,19 +8,19 @@ setInterval(() => {
         document.querySelector(".lower").style.visibility = "visible";
     }
 
-}, 50);
+}, 70);
 
-document.querySelector("body").style.backgroundColor = "orange"
+document.querySelector("body").style.backgroundColor = "pink"
 const loadFlags = new Promise(res => {
+    const board = document.querySelector(".board");
+    board.style.height = 'auto';
     for (let i = 0; i < 21; i++) {
         const image = new Image();
         image.src = './images/flag.gif';
         image.setAttribute('id', i);
         image.setAttribute('class', 'open');
         image.style.borderRadius = "70px";
-        const board = document.querySelector(".board");
         board.appendChild(image);
-        board.style.height = 'auto';
     }
     console.log('1-done loading flags')
     res('sucess')
