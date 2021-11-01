@@ -1,16 +1,18 @@
 // test to see if i can push now
 // set flags onto screen
 const board = document.querySelectorAll(".board img");
-setInterval(() => {
+const flagLoadCheck = setInterval(() => {
     const len = document.querySelectorAll(".board img").length;
     console.log(len)
     if (len === 21) {
+        console.log("flasgs loades")
         document.querySelector(".lower").style.visibility = "visible";
+        clearInterval(flagLoadCheck)
     }
 
 }, 50);
 
-document.querySelector("body").style.backgroundColor = "orange"
+document.querySelector("body").style.backgroundColor = "teal"
 const loadFlags = new Promise(res => {
     for (let i = 0; i < 21; i++) {
         const image = new Image();
@@ -25,12 +27,12 @@ const loadFlags = new Promise(res => {
     console.log('1-done loading flags')
     res('sucess')
 })
-loadFlags
-    .then(() => {
-        console.log("2-finished promise")
-        showBottomBtns()
-        console.log("4done")
-    });
+// loadFlags
+//     .then(() => {
+//         console.log("2-finished promise")
+//         showBottomBtns()
+//         console.log("4done")
+//     });
 console.log("9")
 // this is done to fix the flickering of bottom buttons on page load and fast reload
 function showBottomBtns() {
