@@ -1,21 +1,8 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("brown")
-const board = document.querySelectorAll(".board img");
-const flagLoadCheck = setInterval(() => {
-    const len = document.querySelectorAll(".board img").length;
-    console.log(len)
-    if (len === 21) {
-        console.log("flasgs loades")
-        setTimeout(() => {
-            document.querySelector(".lower").style.visibility = "visible";
-        }, 150)
-        clearInterval(flagLoadCheck)
-    }
+console.log("blue")
+document.querySelector("body").style.backgroundColor = "blue"
 
-}, 50);
-
-document.querySelector("body").style.backgroundColor = "brown"
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     board.style.height = 'auto';
@@ -28,6 +15,51 @@ const loadFlags = new Promise(res => {
         board.appendChild(image);
     }
     console.log('1-done loading flags')
+    // make buttons
+    const lowerDiv = document.querySelector(".lower");
+    const doneButton = document.createElement('button');
+    doneButton.setAttribute("id", "done");
+    doneButton.innerHTML = 'DONE'
+    const replayButton = document.createElement('button');
+    replayButton.setAttribute("id", "replay");
+    replayButton.innerHTML = "REPLAY";
+    const selectTime = document.createElement("select");
+    selectTime.setAttribute("id", "timer");
+    const selectDifficulty = document.createElement("select");
+    selectDifficulty.setAttribute("id", "select")
+
+
+
+    lowerDiv.appendChild(doneButton);
+    lowerDiv.appendChild(replayButton);
+    lowerDiv.appendChild(selectTime);
+    lowerDiv.appendChild(selectDifficulty)
+    // < button id = "done" > DONE</button >
+    //     <button id="replay">REPLAY</button>
+    //     <select id="timer">
+    //         <option value="0" selected>0 sec TIMER</option>
+    //         <option value="2">2 sec TIMER</option>
+    //         <option value="3">3 sec TIMER</option>
+    //         <option value="4">4 sec TIMER</option>
+    //         <option value="5">5 sec TIMER</option>
+    //         <option value="6">6 sec TIMER</option>
+    //         <option value="7">7 sec TIMER</option>
+    //         <option value="8">8 sec TIMER</option>
+    //         <option value="9">9 sec TIMER</option>
+    //         <option value="10">10 sec TIMER</option>
+    //     </select>
+    //     <!--11 is easy, 111 is hard, 1111 is cant win-- >
+    // <select id="select" data-turn="1">
+    //     <option value="1" selected>Player 1 first</option>
+    //     <option value="2">Player 2 first</option>
+    //     <option value="11" id="pc2">I'm 1st, computer's 2nd -- EASY</option>
+    //     <option value="111" id="pc2">I'm 1st, computer's 2nd -- MEDIUM</option>
+    //     <option value="1111" id="pc2">I'm 1st, computer's 2nd -- HARD</option>
+    //     <option value="22" id="pc1">I'm 2nd, computer's 1st -- EASY</option>
+    //     <option value="222" id="pc1">I'm 2nd, computer's 1st -- MEDIUM</option>
+    //     <option value="2222" id="pc1">I'm 2nd, computer's 1st -- IMPOSSIBLE</option>
+
+    // </select>
     res('sucess')
 })
 // loadFlags
