@@ -1,9 +1,9 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("red")
+console.log("teal")
 const board = document.querySelectorAll(".board img");
 
-document.querySelector("body").style.backgroundColor = "red"
+document.querySelector("body").style.backgroundColor = "teal"
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     console.log(window.screen.availHeight, window.screen.availWidth)
