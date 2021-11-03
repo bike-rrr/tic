@@ -1,9 +1,9 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("orange")
+console.log("blue")
 const board = document.querySelectorAll(".board img");
 
-document.querySelector("body").style.backgroundColor = "orange"
+document.querySelector("body").style.backgroundColor = "blue"
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     console.log(window.screen.availHeight, window.screen.availWidth)
@@ -26,7 +26,7 @@ const loadFlags = new Promise(res => {
     res('sucess')
 })
 
-window.addEventListener("resize", () => {
+window.addEventListener("onOrientationChange", () => {
     console.log("resize")
     if (window.screen.availHeight > window.screen.availWidth) {
         console.log("it is")
