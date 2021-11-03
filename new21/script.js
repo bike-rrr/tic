@@ -18,7 +18,7 @@ const loadFlags = new Promise(res => {
         image.setAttribute('id', i);
         image.setAttribute('class', 'open');
         // image.style.borderRadius = "70px";
-        image.style.height = "6.3vh"
+        image.style.height = "8vh"
         const board = document.querySelector(".board");
         board.appendChild(image);
     }
