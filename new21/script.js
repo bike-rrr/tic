@@ -1,9 +1,9 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("green")
+console.log("yellow")
 const board = document.querySelectorAll(".board img");
 
-document.querySelector("body").style.backgroundColor = "green"
+document.querySelector("body").style.backgroundColor = "yellow"
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     console.log(window.screen.availHeight, window.screen.availWidth)
@@ -35,16 +35,16 @@ window.addEventListener("resize", () => {
         document.querySelector(".board").style.height = "25vh";
     }
 })
-// loadFlags
-//     .then(() => {
-//         console.log("2-finished promise")
-//         showBottomBtns()
-//         console.log("4done")
-//     });
+loadFlags
+    .then(() => {
+        console.log("2-finished promise")
+        showBottomBtns()
+        console.log("4done")
+    });
 console.log("9")
 // this is done to fix the flickering of bottom buttons on page load and fast reload
 function showBottomBtns() {
-    // document.querySelector(".lower").style.visibility = "visible";
+    document.querySelector(".lower").style.visibility = "visible";
     console.log('3-added buttons')
 }
 
