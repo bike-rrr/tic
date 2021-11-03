@@ -1,38 +1,39 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("blue")
-console.log("brown")
+console.log("purple")
 const board = document.querySelectorAll(".board img");
-const flagLoadCheck = setInterval(() => {
-    const len = document.querySelectorAll(".board img").length;
-    console.log(len)
-    if (len === 21) {
-        console.log("flasgs loades")
-        setTimeout(() => {
-            document.querySelector(".lower").style.visibility = "visible";
-        }, 150)
-        clearInterval(flagLoadCheck)
-    }
 
-}, 50);
-
-document.querySelector("body").style.backgroundColor = "blue"
-document.querySelector("body").style.backgroundColor = "brown"
+document.querySelector("body").style.backgroundColor = "purple"
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
-    board.style.height = 'auto';
+    console.log(window.screen.availHeight, window.screen.availWidth)
+    if (window.screen.availHeight > window.screen.availWidth) {
+        board.style.height = '70vh';
+    } else {
+        board.style.height = '25vh'
+    }
     for (let i = 0; i < 21; i++) {
         const image = new Image();
         image.src = './images/flag.gif';
         image.setAttribute('id', i);
         image.setAttribute('class', 'open');
-        image.style.borderRadius = "70px";
+        // image.style.borderRadius = "70px";
         const board = document.querySelector(".board");
         board.appendChild(image);
-        board.style.height = 'auto';
     }
     console.log('1-done loading flags')
     res('sucess')
+})
+
+window.addEventListener("resize", () => {
+    console.log("resize")
+    if (window.screen.availHeight > window.screen.availWidth) {
+        console.log("it is")
+        document.querySelector(".board").style.height = "70vh";
+    } else {
+        console.log("its not")
+        document.querySelector(".board").style.height = "25vh";
+    }
 })
 // loadFlags
 //     .then(() => {
