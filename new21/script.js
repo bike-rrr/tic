@@ -1,14 +1,14 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("purple")
+console.log("green")
 const board = document.querySelectorAll(".board img");
 
-document.querySelector("body").style.backgroundColor = "purple"
+document.querySelector("body").style.backgroundColor = "green"
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     console.log(window.screen.availHeight, window.screen.availWidth)
     if (window.screen.availHeight > window.screen.availWidth) {
-        board.style.height = '70vh';
+        board.style.height = '60vh';
     } else {
         board.style.height = '25vh'
     }
