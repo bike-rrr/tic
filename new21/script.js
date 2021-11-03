@@ -1,9 +1,9 @@
 // test to see if i can push now
 // set flags onto screen
-console.log("purple")
+console.log("red")
 const board = document.querySelectorAll(".board img");
 
-document.querySelector("body").style.backgroundColor = "purple";
+document.querySelector("body").style.backgroundColor = "red";
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     console.log(window.screen.availHeight, window.screen.availWidth)
@@ -27,8 +27,8 @@ const loadFlags = new Promise(res => {
 })
 
 window.addEventListener('resize', () => {
-    console.log("resize")
-    if (window.screen.availHeight > window.screen.availWidth) {
+    console.log(window.innerHeight, window.innerWidth)
+    if (window.innerHeight > window.innerWidth) {
         console.log("it is")
         document.querySelector(".board").style.height = "57vh";
         document.querySelector("body").style.backgroundColor = "pink";
