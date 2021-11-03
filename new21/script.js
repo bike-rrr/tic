@@ -8,7 +8,7 @@ const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     console.log(window.screen.availHeight, window.screen.availWidth)
     if (window.screen.availHeight > window.screen.availWidth) {
-        board.style.height = '60vh';
+        board.style.height = '57vh';
     } else {
         board.style.height = '25vh'
     }
@@ -30,9 +30,11 @@ window.addEventListener("resize", () => {
     if (window.screen.availHeight > window.screen.availWidth) {
         console.log("it is")
         document.querySelector(".board").style.height = "70vh";
+        document.querySelector(".boady").style.backgroundColor = "pink"
     } else {
         console.log("its not")
         document.querySelector(".board").style.height = "25vh";
+        document.querySelector(".boady").style.backgroundColor = "green"
     }
 })
 loadFlags
