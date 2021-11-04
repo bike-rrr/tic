@@ -10,7 +10,7 @@ const loadFlags = new Promise(res => {
     if (window.innerHeight > window.innerWidth) {
         board.style.height = '57vh';
     } else {
-        board.style.height = '20vh'
+        board.style.height = '25vh'
     }
     for (let i = 0; i < 21; i++) {
         const image = new Image();
