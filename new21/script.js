@@ -31,11 +31,11 @@ window.addEventListener('resize', () => {
     if (window.innerHeight > window.innerWidth) {
         console.log("it is")
         document.querySelector(".board").style.height = "57vh";
-        document.querySelector("body").style.backgroundColor = "pink";
+        // document.querySelector("body").style.backgroundColor = "pink";
     } else {
         console.log("its not")
         document.querySelector(".board").style.height = "25vh";
-        document.querySelector("body").style.backgroundColor = "green"
+        // document.querySelector("body").style.backgroundColor = "green"
     }
 })
 loadFlags
