@@ -3,7 +3,7 @@
 console.log("yellow")
 const board = document.querySelectorAll(".board img");
 
-document.querySelector("body").style.backgroundColor = "yellow";
+// document.querySelector("body").style.backgroundColor = "yellow";
 const loadFlags = new Promise(res => {
     const board = document.querySelector(".board");
     console.log(window.screen.availHeight, window.screen.availWidth)
