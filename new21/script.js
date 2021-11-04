@@ -10,7 +10,7 @@ const loadFlags = new Promise(res => {
     if (window.innerHeight > window.innerWidth) {
         board.style.height = '57vh';
     } else {
-        board.style.height = '25vh'
+        board.style.height = '20vh'
     }
     for (let i = 0; i < 21; i++) {
         const image = new Image();
@@ -34,7 +34,7 @@ window.addEventListener('resize', () => {
         // document.querySelector("body").style.backgroundColor = "pink";
     } else {
         console.log("its not")
-        document.querySelector(".board").style.height = "25vh";
+        document.querySelector(".board").style.height = "20vh";
         // document.querySelector("body").style.backgroundColor = "green"
     }
 })
