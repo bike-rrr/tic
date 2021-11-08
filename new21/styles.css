@@ -31,6 +31,9 @@ img {
     -ms-user-select: none;
     user-select: none;
 
+    position: relative; 
+    
+
     /*added to fix win message*/
     color:white;
     text-align:center;
@@ -288,7 +291,12 @@ button:hover{
     img {
         height:8vh;
     }
+    .wrapper {
+    }
 }
+
+
+
 @media only screen and (min-height: 1300px) and (min-width: 1000px) {
     .wrapper {
         width:800px;
