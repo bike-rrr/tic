@@ -6,13 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     // set Local Storage **done on form submit**
     // TODO => on keyUP, so we always keep track
-    // if (localStorage.getItem('inputValues')) {
-    //     document.querySelectorAll("input").forEach(field => {
-    //         const data = JSON.parse(localStorage.getItem("inputValues"));
-    //         field.value = data[field.id]
-    //     })
-    // }
+    if (localStorage.getItem('inputValues')) {
+        document.querySelectorAll("input").forEach(field => {
+            const data = JSON.parse(localStorage.getItem("inputValues"));
+            field.value = data[field.id]
+        })
+    }
 })
+let inputValues;
 
 // format all input fields with a decimal
 const fields = document.querySelectorAll('input').forEach(field => {
@@ -82,14 +83,14 @@ form.onsubmit = () => {
     taxRate = 1.0975;
 
     // setLocal Storage while were here
-    // const inputValues = {
-    //     subTotal,
-    //     onlineDiscount,
-    //     otherDiscounts,
-    //     taxAmount: parseFloat(form.taxAmount.value),
-    //     originalTotal
-    // }
-    // localStorage.setItem("inputValues", JSON.stringify(inputValues));
+    inputValues = {
+        subTotal,
+        onlineDiscount,
+        otherDiscounts,
+        taxAmount: parseFloat(form.taxAmount.value),
+        originalTotal
+    }
+    localStorage.setItem("inputValues", JSON.stringify(inputValues));
 
 
     // if theres discount PLUS a coupon, the TAX is calculated from sub - discount, and THEN the coupon is taken off
