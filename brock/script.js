@@ -89,7 +89,11 @@ form.onsubmit = () => {
         taxAmount: parseFloat(form.taxAmount.value),
         originalTotal
     }
-    window.localStorage.setItem("inputValues", "teeeest");
+    try {
+        localStorage.setItem("inputValues", "teeeest");
+    } catch (error) {
+        document.body.innerHTML = error;
+    }
 
 
     // if theres discount PLUS a coupon, the TAX is calculated from sub - discount, and THEN the coupon is taken off
