@@ -19,6 +19,12 @@ input, button{
 button {
     margin-top:10px;
     background-color: lightcyan;
+    margin-left: 20px; /* spaced so bottom buttons arent right next to each other using display flex */
+}
+
+.bottomButtons {
+    display: flex;
+    justify-content: center;
 }
 
 input {

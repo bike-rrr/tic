@@ -184,6 +184,10 @@ form.onsubmit = () => {
     return false;
 }
 
+document.querySelector("#clear").onclick = () => {
+    document.querySelectorAll("input").forEach(i => i.value = "");
+    document.querySelector("table").innerHTML = "";
+}
 
 
 
