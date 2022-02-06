@@ -41,6 +41,7 @@ const fields = document.querySelectorAll('input').forEach(field => {
 const form = document.querySelector("#form");
 
 form.onsubmit = () => {
+    console.log("we are sbmitting")
     // make sure required fields are fill out
     let inputEmpty = false;
     document.querySelectorAll('input.required').forEach(item => {
