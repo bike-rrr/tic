@@ -19,7 +19,7 @@ input, button{
 button {
     margin-top:10px;
     background-color: lightcyan;
-    margin-left: 20px; /* spaced so bottom buttons arent right next to each other using display flex */
+    margin-left: 0px; /* spaced so bottom buttons arent right next to each other using display flex */
     padding-left: 10px;
     padding-right: 10px;
 }
