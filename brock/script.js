@@ -82,14 +82,14 @@ form.onsubmit = () => {
     taxRate = 1.0975;
 
     // setLocal Storage while were here
-    // const inputValues = {
-    //     subTotal,
-    //     onlineDiscount,
-    //     otherDiscounts,
-    //     taxAmount: parseFloat(form.taxAmount.value),
-    //     originalTotal
-    // }
-    // localStorage.setItem("inputValues", "test");
+    const inputValues = {
+        subTotal,
+        onlineDiscount,
+        otherDiscounts,
+        taxAmount: parseFloat(form.taxAmount.value),
+        originalTotal
+    }
+    window.localStorage.setItem("inputValues", "teeeest");
 
 
     // if theres discount PLUS a coupon, the TAX is calculated from sub - discount, and THEN the coupon is taken off
