@@ -20,8 +20,9 @@ button {
     margin-top:10px;
     background-color: lightcyan;
     /* margin-left: 20px; spaced so bottom buttons arent right next to each other using display flex */
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    width:47%
 }
 .bottomButtonsWrapper {
   display: flex;
@@ -30,7 +31,7 @@ button {
 }
 
 .bottomButtons {
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content:space-between;
 }
