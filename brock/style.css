@@ -75,9 +75,6 @@ span {
 }
 
 @media only screen and (max-width: 430px) {
-    * {
-        /* background-color: orange; */
-    }
     .fields {
         width:90%;
     }
