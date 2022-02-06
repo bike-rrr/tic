@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     })
     // set Local Storage **done on form submit**
     // TODO => on keyUP, so we always keep track
-    if (localStorage.getItem('inputValues')) {
-        document.querySelectorAll("input").forEach(field => {
-            const data = JSON.parse(localStorage.getItem("inputValues"));
-            field.value = data[field.id]
-        })
-    }
+    // if (localStorage.getItem('inputValues')) {
+    //     document.querySelectorAll("input").forEach(field => {
+    //         const data = JSON.parse(localStorage.getItem("inputValues"));
+    //         field.value = data[field.id]
+    //     })
+    // }
 })
 
 // format all input fields with a decimal
