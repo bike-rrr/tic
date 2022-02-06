@@ -14,7 +14,7 @@ input, button{
     background-color: turquoise;
     font-size: 20px;
     font-family: monospace;
-    
+    padding-left: 10px;
 }
 button {
     margin-top:10px;
